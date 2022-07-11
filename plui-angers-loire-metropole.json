@@ -1,0 +1,14 @@
+[
+    {
+        "datasetid": "plui-angers-loire-metropole",
+        "recordid": "f61bf86bd10ebaa3d24c541d631828c51daafaee",
+        "fields": {
+            "download": "https://www.geoportail-urbanisme.gouv.fr/document/download-by-id/43e045866842caf13590737f0a19d14a",
+            "date_update": "2021-09-13",
+            "id": "244900015_PLUi_20210913",
+            "description": "PLUI Angers Loire M\u00e9tropole",
+            "date_approbation": "2021-09-13"
+        },
+        "record_timestamp": "2021-11-24T16:08:54.762+01:00"
+    }
+]

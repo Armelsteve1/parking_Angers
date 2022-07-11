@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang='fr'>
+<head>
+	<title>Parking Angers</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="lib/leaflet.css" />
+<link rel="stylesheet" href="lib/leaflet-routing-machine.css" />
+	<script src="lib/leaflet.js"></script>
+	<script src="lib/jquery-3.3.1.min.js"></script> 
+<script src="lib/leaflet-routing-machine.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="style.css">
+
+
+<style>
+	body {
+		padding: 0;
+		margin: 0;
+	}
+	html, body, #map {
+		height: 100%;
+		width: 100vw;
+	}
+
+	.leaflet-tooltip.my-labels {
+		background-color: transparent;
+		border: transparent;
+		box-shadow: none;
+		color:black;
+		font-size: 14px;
+	}
+</style>
+</head>
+<body>
+	<div id="map"></div>
+
+	<div class="list-map-container">
+		<i id="close-project-detail" class="fas fa-times"></i>
+		<div class="header-container">
+			<h1>Parkings disponible à Angers</h1>
+			<p>Nombre total des parkings trouvés <span id="nbr-parking"></span></p>
+		</div>
+		<ul></ul>
+	</div>
+	<div class="modalContainer">
+		<div id="modal">
+			<i id="close-modal" class="fas fa-times"></i>
+			<div class="detail-item"></div>
+		</div>
+	</div>
+	<script>
+function onLocationFound(e) {
+    var radius = e.accuracy / 2;
+
+    L.circleMarker(e.latlng).addTo(map).bindPopup("Vous êtes ici").openPopup();
+
+    L.circle(e.latlng, radius).addTo(map);
+}
+
+function onLocationError(e) {
+    alert(e.message);
+}
+
+function getAvailability(){
+
+	var requestURL = 'https://data.angers.fr/api/records/1.0/search/?dataset=parking-angers&facet=nom&rows=18';
+ 
+	//group.clearLayers();
+
+	$.getJSON(requestURL,function(response){
+		var records =response['records'];  
+
+		//   var url = './geodata/angers.json';
+		var url = '';
+		  $.getJSON(url,function(data){
+  			for (var i = 0; i < records.length; i++) {
+			      var field=records[i]['fields'];	
+        			for (var j=0;j<data['features'].length;j++){
+					nom=data['features'][j]['properties']['nom'];		
+					cood=data['features'][j]['geometry']['coordinates'];
+	
+					if (field['nom']==nom){
+						data['features'][j]['properties']['disponible']=field['disponible'];			
+					}			
+				}
+        	}
+		group.clearLayers();
+  		L.geoJson(data,{
+			style: function (feature) {
+			//var dispo=feature.properties.disponible;
+			var freeRate=Math.round(feature.properties.disponible/feature.properties.capacite*100);	
+			//alert(freeRate);		
+			if (freeRate>=90.0){
+			return {color:"#66ff33"};			
+			} else if (freeRate<90 && freeRate >=75.0){
+			return {color:"#99ff33"};			
+			} else if (freeRate<75.0 && freeRate >=55.0){
+			return {color:"#ccff33"};			
+			} else if (freeRate<55.0 && freeRate >=40.0){
+			return {color:"#ffff00"};			
+			} else if (freeRate<40.0 && freeRate >=20.0){
+			return {color:"#ff9900"};
+			} else if (freeRate<20.0 && freeRate >=10.0){
+			return {color:"#ff6600"};
+			} else if (freeRate>=0 && freeRate<10){
+			return {color:"#cc0000"};			
+			} else {
+			return {color:"black"};
+			}			
+			},
+			onEachFeature: function (feature, layer) {
+				if (feature.properties.capacite!=0){				
+				var occupationRate=Math.round((feature.properties.capacite-feature.properties.disponible)/feature.properties.capacite*100*100)/100;
+				var capacite=feature.properties.capacite;
+				} else{
+				var occupationRate=100;
+				var capacite="Fermé"				
+				}
+
+				var informations="Parking: "+feature.properties.nom+"<br>"+"Capacité: "+capacite+"<br>"+"Places disponibles: "+feature.properties.disponible+"<br>"+"Taux d'occupation: "+occupationRate+"%";
+				layer.bindPopup(informations);
+			},
+			pointToLayer: function(feature, latlng) {
+			//var rad=feature.properties.disponible/100;
+			var label =String(feature.properties.disponible);
+      			return L.circleMarker(latlng,{radius:23,fillOpacity:0.6}).bindTooltip(label, {permanent: true, direction:"center", className: "my-labels",opacity: 1.0}).openTooltip();}
+			}).addTo(group);
+  		  });
+  			map.addLayer(group);
+ 	});
+}
+
+	// initialize the map
+	var map = L.map('map').setView([47.471439,-0.551969], 16);
+
+  // load a tile layer
+L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+{
+	attribution: '&copy; <a href="https://data.angers.fr/pages/home/">Angers Open Data </a>&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+	maxZoom: 19,
+	minZoom: 9
+}).addTo(map);
+
+
+axios.get('https://data.angers.fr/api/records/1.0/search/?dataset=parking-angers&q=&rows=18&facet=nom')
+.then(res => {
+
+	$('#nbr-parking').append(res.data.records.length)
+	var data = res.data.records;
+	
+	data.map((response, index) => {
+		let date = response.record_timestamp
+		const [dateValues, timeValues] = date.split('T');
+		$('.list-map-container ul').append(
+			'<li class="list-item" data-index='+index+'><div class="parking-detail"><strong>Parking '+response.fields.nom+'</strong><p class="disponibilite">disponibilité: '+response.fields.disponible+'</p><p class="maj">dernière mis à jour: '+dateValues+' à '+timeValues.substring(0, 5)+'</p></div><h2 id="h2">p</h2></li>'
+		)
+	})
+
+	callSelectItem(data);
+
+})
+.catch(err => {
+	console.log(err)
+})
+
+
+function callSelectItem(data){
+	var item = document.querySelectorAll('.list-item')
+
+	$('.list-item').on('click', onOpenModalDetails)
+}
+
+function onOpenModalDetails(){
+	let index = this.dataset.index
+
+	$('.detail-item').html('')
+
+	$('.modalContainer').css('display', 'flex')
+
+	axios.get('https://data.angers.fr/api/records/1.0/search/?dataset=parking-angers&q=&rows=18&facet=nom')
+	.then(res => {
+		var data = res.data.records[index]
+
+		const [dateValues, timeValues] = data.record_timestamp.split('T');
+
+	
+		$('.detail-item').append('<h3 class="modal-park-name"> parking '+data.fields.nom+'</h3><p>nombre de places disponibles: '+data.fields.disponible+'</p><p>Dernière mis à jour: '+dateValues+' à '+timeValues.substring(0, 5)+' </p><a href="#">Voir l\'itinéraire</a>')
+	})
+	.catch(err => {
+		console.log(err)
+	})
+}
+
+function onCloseModalDetails(){
+	$('.modalContainer').css('display', 'none')
+}
+
+$('#close-modal').on('click', onCloseModalDetails)
+
+
+	/*
+map.locate({setView: true, maxZoom: 14});
+map.on('locationfound', onLocationFound);
+map.on('locationerror', onLocationError);
+*/
+
+var group = L.featureGroup();
+getAvailability();
+setInterval(getAvailability,30000);
+
+</script>
+
+<script src="https://kit.fontawesome.com/9d8138c3b6.js" crossorigin="anonymous" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+</body>
+</html>
+	

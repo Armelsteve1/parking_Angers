@@ -1,0 +1,164 @@
+[
+    {
+        "datasetid": "parking-angers",
+        "recordid": "dc8a4bc39483ef1039d76a18647fe1fa365c71b1",
+        "fields": {
+            "disponible": 252,
+            "nom": "Ralliement"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "ceee2f0d7ffd99d97dde7f973341ab1193977393",
+        "fields": {
+            "disponible": 173,
+            "nom": "Moliere"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "8461c19be43073d7295d23bdac36c6a196b10c6a",
+        "fields": {
+            "disponible": 43,
+            "nom": "Saint Laud"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "ed283ba25c2c85991c475b415f474af5d0ac9e92",
+        "fields": {
+            "disponible": 213,
+            "nom": "Republique"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "bbedbbd1e5f327636ab2e9f8f765735d27bb7649",
+        "fields": {
+            "disponible": 226,
+            "nom": "Marengo"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "46f368bf3150428b09d3354fb32b076c4fce8524",
+        "fields": {
+            "disponible": 210,
+            "nom": "Saint Serge Patinoire"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "4927e2140033602c761787674258a3ab553ea885",
+        "fields": {
+            "disponible": 206,
+            "nom": "Mail"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "706fc4c43ff27e2d993eea184c8ba995c610ec3c",
+        "fields": {
+            "disponible": 51,
+            "nom": "Maternite"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "f0f547cacacc18c19c6857d13611e7664b3d9c1c",
+        "fields": {
+            "disponible": 63,
+            "nom": "Mitterrand Rennes"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "76825f2a76af178b2b4731770ec436d7912e9343",
+        "fields": {
+            "disponible": 83,
+            "nom": "Bressigny"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "cf9ec3902e113dfe420603f67e994c5024ad4d5d",
+        "fields": {
+            "disponible": 27,
+            "nom": "Larrey"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "d3c035f4fa893fe643a0f42aa5c53600f89df02a",
+        "fields": {
+            "disponible": 65,
+            "nom": "Mitterrand Maine"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "5d14dfe18b0cd7e88e3be5de99c67c1408e691ac",
+        "fields": {
+            "disponible": 97,
+            "nom": "Haras Public"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "5bdeb5cafa61c297e294b2b0cbe9de59ac3c630e",
+        "fields": {
+            "disponible": 29,
+            "nom": "Confluences"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "fc39a2e3c90b7683045dd2101a7ea93faa393f2e",
+        "fields": {
+            "disponible": 149,
+            "nom": "Berges De Maine"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "5a8110375692c9bd5bee6a45c0ef9a77d68b32c1",
+        "fields": {
+            "disponible": 173,
+            "nom": "Leclerc"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "7611eb5063060c083a6744d923abd2d9cd0bdb34",
+        "fields": {
+            "disponible": 326,
+            "nom": "Saint Laud 2"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    },
+    {
+        "datasetid": "parking-angers",
+        "recordid": "98b4b0fcfac0051d7a22018299524907e55aec00",
+        "fields": {
+            "disponible": 74,
+            "nom": "Quai"
+        },
+        "record_timestamp": "2022-06-13T21:25:00+02:00"
+    }
+]
